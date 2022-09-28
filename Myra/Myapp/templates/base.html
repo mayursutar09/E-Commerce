@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %} | Myra the Shopping Store</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static '/images/favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}{% endblock %}
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <!--fontawesome-->
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{% url 'category' %}"><img src="{% static 'images/myralogo.png' %}" alt="logo" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="{% url 'category' %}">Home</a></li>
+                        <li><a href="{% url 'products' %}">Products</a></li>
+                        <li><a href="{% url 'about' %}">About</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'account' %}">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="{% url 'cart' 0 0 %}"><i class="fa fa-shopping-cart" style="font-size:30px"></i></a>
+                <i class="fa fa-bars menu-icon" style="font-size:30px" onclick="Menutoggle()"></i>
+                {% if user.is_authenticated %}
+                <p>{{user.get_username}}</p><img src="{% static 'images/usericon.png' %}" id="usericon">
+                <a href="/logout/">Logout</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% block body %}{% endblock %}
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobiles.</p>
+                    <div class="app-logo">
+                        <button class="androidbtn"><i class="fab fa-google-play" style="font-size: 20px;"></i>
+                            Download</button>
+                        <button class="applebtn"><i class="fab fa-apple" style="font-size: 20px;"></i> Download</button>
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="{% static 'images/whitelogo.png' %}">
+                    <p>Our Goal is to Facilitate Online Trade Easily for Both Sellers and Buyers.</p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li><i class="fa fa-facebook-square" aria-hidden="true"></i></i> Facebook</li>
+                        <li><i class="fa fa-twitter-square"></i> Twitter</li>
+                        <li><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</li>
+                        <li><i class="fa fa-youtube-play" aria-hidden="true"></i>  Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright"><i class="fa fa-copyright" aria-hidden="true"> Copyright 2022 -Myra</i></p>
+        </div>
+        <script>
+            var MenuItems = document.getElementById("MenuItems");
+            MenuItems.style.maxHeight = "0px";
+            function Menutoggle() {
+                if (MenuItems.style.maxHeight == "0px") {
+                    MenuItems.style.maxHeight = "200px";
+                } else {
+                    MenuItems.style.maxHeight = "0px";
+                }
+            }
+        </script>
+</body>
+
+</html>

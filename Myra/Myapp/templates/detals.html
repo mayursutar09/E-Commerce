@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Product Details{% endblock %}
+{% load static %}
+{% block css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/middle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+<div class="small-container single-product">
+    <div class="row">
+        <div class="col-2">
+            <img src="{{vardetails.src}}" width="100%" id="productImg">
+            <div class="small-img-row">
+                <div class="small-img-col">
+                    <img src="{{vardetails.cat1}}" width="100%" height="auto" alt="img" class="smallImg">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{vardetails.cat2}}" width="100%" alt="img" class="smallImg">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{vardetails.cat3}}" width="100%" alt="img" class="smallImg">
+                </div>
+                <div class="small-img-col">
+                    <img src="{{vardetails.cat4}}" width="100%" alt="img" class="smallImg">
+                </div>
+            </div>
+        </div>
+        <div class="col-2">
+            <h1>{{vardetails.context}}</h1>
+            <h4>{{vardetails.price}}</h4>
+            <select name="">
+                <option value="">Select Zize</option>
+                <option value="">XXL</option>
+                <option value="">XL</option>
+                <option value="">L</option>
+                <option value="">M</option>
+                <option value="">S</option>
+            </select>
+            <input type="number" value="1" id="quantity">
+            <a href="{% url 'cart' vardetails.id 1 %}" class="btn" id="addtocart">Add To Cart</a>
+            <h3>Product Details <i class="fa fa-indent"></i></h3>
+            <br>
+            <p>{{vardetails.productdetail}}</p>
+        </div>
+    </div>
+</div>
+<div class="small-container">
+    <div class="row row-2">
+        <h2>Related Products</h2>
+        <p>view more</p>
+    </div>
+</div>
+<script>
+    var productImg = document.getElementById('productImg')
+    var smallImg = document.getElementsByClassName('smallImg')
+    smallImg[0].onclick = function () {
+        productImg.src = smallImg[0].src;
+    }
+    smallImg[1].onclick = function () {
+        productImg.src = smallImg[1].src;
+    }
+    smallImg[2].onclick = function () {
+        productImg.src = smallImg[2].src;
+    }
+    smallImg[3].onclick = function () {
+        productImg.src = smallImg[3].src;
+    }
+    let quantity = document.getElementById("quantity");
+    quantity.addEventListener("input", function () {
+        let addtocart = document.getElementById("addtocart").href;
+        let slicestring = addtocart.slice(0, -2);
+        document.getElementById("addtocart").href = slicestring + quantity.value + "/";
+    });
+</script>
+{% endblock %}

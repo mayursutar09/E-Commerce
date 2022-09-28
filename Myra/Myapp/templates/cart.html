@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+{% load static %}
+{% block css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/middle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+<div class="small-container cart-page">
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody id="cartTable">
+            <tr>
+                <td>
+                    <div class="cart-info">
+                        <img src="{{cartdetail.src}}" alt="img">
+
+                        <div>
+                            <p>{{cartdetail.context}}</p>
+                            <small id="price">Price: {{cartdetail.price}}</small><br>
+                            <button id="remove"
+                                style="border:none;background-color:#fff;color:rgb(255, 102, 102);cursor: pointer;">Remove</button>
+                        </div>
+                    </div>
+                </td>
+                <td><input type="number" value="{{quantity}}" id="quantity"></td>
+                <td id="upperSubTotal"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td id="subtotal"></td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td id="tax"></td>
+            </tr>
+            <tr>
+                <td>Grand Total</td>
+                <td id="grandTotal"></td>
+            </tr>
+            <tr>
+                <td><a href="{% url 'payment' %}"><button type="button" class="btn">Place Order &#10141;</button></a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script>
+    function Calculations() {
+        let price = parseFloat(document.getElementById("price").innerText.slice(8));
+        let subtotal = document.getElementById("subtotal").innerText;
+        let tax = document.getElementById("tax").innerText;
+        let grandTotal = document.getElementById("grandTotal").innerText;
+        let quantity = parseInt(document.getElementById("quantity").value);
+        let upperSubTotal = document.getElementById("upperSubTotal").innerText;
+        subtotal = quantity * price;
+        tax = subtotal * 0.18;
+        grandTotal = parseFloat(subtotal) + parseFloat(tax);
+        upperSubTotal = subtotal;
+        document.getElementById("subtotal").innerText = subtotal;
+        document.getElementById("grandTotal").innerText = grandTotal;
+        document.getElementById("upperSubTotal").innerText = upperSubTotal;
+        document.getElementById("tax").innerText = tax;
+    }
+    Calculations();
+    let quantity = document.getElementById("quantity");
+    quantity.addEventListener("input", function () {
+        if (quantity.value != '') {
+            Calculations();
+        }
+    });
+    let remove = document.getElementById("remove");
+    remove.addEventListener('click', function () {
+        let removerow = remove.parentElement.parentElement.parentElement.parentElement;
+        let cartTable = document.getElementById("cartTable");
+        cartTable.removeChild(removerow)
+        document.getElementById("subtotal").innerText = 0;
+        document.getElementById("grandTotal").innerText = 0;
+        document.getElementById("tax").innerText = 0;
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}About{% endblock %}
+{% load static %}
+{% block css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+{% block body %}
+<section>
+    <div class = "image">
+        <!-- image here -->
+    </div>
+
+    <div class = "content">
+        .
+        <h2>About Us</h2>
+        <span><!-- line here --></span>
+
+        <p>Myra.com, Inc. is an Indian multinational technology company which focuses on e-commerce, cloud computing, digital streaming, and artificial intelligence. It has been referred to as "one of the most influential economic and cultural forces in the world", and is one of the world's most valuable brands. It is one of the Big Five American information technology companies, alongside Alphabet, Apple, Meta, and Microsoft.</p>
+
+        <ul class = "links">
+            <li><a href = "#">work</a></li>
+
+            <div class = "vertical-line"></div>
+
+            <li><a href = "#">service</a></li>
+
+            <div class = "vertical-line"></div>
+            
+            <li><a href = "#">contact</a></li>
+        </ul>
+
+        <ul class = "icons">
+            <li>
+                <i class = "fa fa-twitter"></i>
+            </li>
+            <li>
+                <i class = "fa fa-facebook"></i>
+            </li>
+            <li>
+                <i class = "fa fa-github"></i>
+            </li>
+            <li>
+                <i class = "fa fa-pinterest"></i>
+            </li>
+        </ul>
+    </div>
+</section>
+
+</body>
+{% endblock %}

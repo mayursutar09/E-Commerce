@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+{% load static %}
+{% block css %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/middle.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block body %}
+<div class="small-container">
+    <div class="row row-2">
+        <h2>All Products</h2>
+        <select name="" id="" value="sort">
+            <option>Default Shorting</option>
+            <option>Sort by price</option>
+            <option>Sort by Popularity</option>
+            <option>Sort by rating</option>
+            <option>Sort by rate</option>
+        </select>
+        <div class="small-container">
+            <div class="row">
+                {% for i in src2 %}
+                <a class="col-4" href="{% url 'details' i.id %}">
+                    <img src="{{i.src}}" alt="product">
+                    <h4>{{i.context}}</h4>
+                    <div class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                    </div>
+                    <p>{{i.price}}</p>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div class="page-btn">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>5</span>
+        <span>&#10141;</span>
+    </div>
+</div>
+{% endblock %}
